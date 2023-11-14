@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:upsky/controller/weather_controller.dart';
 
 import '../model/weather_model.dart';
+import '../utility/utils.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -67,11 +68,11 @@ class _HomepageState extends State<Homepage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Text("HomePage"),
-            Text(_weather?.city ?? "Loading City"),
+            Text(_weather?.city ?? "Loading City", style: styleLight(24)),
             // Lottie.asset("assets/clouds.json"),
             Lottie.asset(getWeatherAnimation(_weather?.condition)),
-            Text("${_weather?.temperature.round()} °C"),
-            Text("${_weather?.condition}")
+            Text("${_weather?.temperature.round()} °C", style: styleBold(36)),
+            Text("${_weather?.condition}", style: styleBold(56))
           ],
         ),
       ),
