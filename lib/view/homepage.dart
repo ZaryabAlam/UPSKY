@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:upsky/controller/weather_controller.dart';
 
 import '../model/weather_model.dart';
+import '../utility/theme_button.dart';
 import '../utility/utils.dart';
 
 class Homepage extends StatefulWidget {
@@ -15,6 +18,13 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   final _weatherService = WeatherController('45fef60cbcf3868583e78327fa627fad');
   Weather? _weather;
+  bool myValue = false;
+
+  void toggleSwitch(bool value) {
+    setState(() {
+      myValue = !myValue;
+    });
+  }
 
   Future<void> _fetchWeather() async {
     String city = await _weatherService.getCurrentCity();
@@ -67,12 +77,14 @@ class _HomepageState extends State<Homepage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Text("HomePage"),
-            Text(_weather?.city ?? "Loading City", style: styleLight(24)),
+            FaIcon(FontAwesomeIcons.locationDot, size: 18),
+            Text(_weather?.city ?? "Loading", style: styleLight(24)),
             // Lottie.asset("assets/clouds.json"),
             Lottie.asset(getWeatherAnimation(_weather?.condition)),
-            Text("${_weather?.temperature.round()} °C", style: styleBold(36)),
-            Text("${_weather?.condition}", style: styleBold(56))
+            Text(_weather?.condition ?? "Loading", style: styleBold(24)),
+            Text("${_weather?.temperature.round() ?? "Loading"} °C",
+                style: styleBold(56)),
+            ChangeThemeButtonWidget(),
           ],
         ),
       ),
