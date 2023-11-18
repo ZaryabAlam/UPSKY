@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'provider/theme_provider.dart';
 import 'view/homepage.dart';
 
+//test
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
